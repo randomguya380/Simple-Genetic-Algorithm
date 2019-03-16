@@ -21,8 +21,8 @@ print(pop)
 sq_avg=10
 
 maxicount=1
-while maxicount<6:
-
+while maxicount<8:
+    print(pop)
     new=[]
     sq_pop=[f**2 for f in pop]
     
@@ -35,53 +35,64 @@ while maxicount<6:
     pm=[f/ps_avg for f in ps]
     pm_avg=avg(pm)
     pm_sum=sum(pm)
-    #per_li=[(f*360)/10 for f in pm]
-    round_pm=[round(f,1) for f in pm]
-    round_round_pm=[round(f) for f in round_pm]
-   # print(sum(round_round_pm))
+   
+    ps_per=[f*1000 for f in ps]
+    sumi=0
+    cumi_ps=[]
+    for l in ps_per:
+        sumi+=l
+        cumi_ps.append(sumi)
+    for l in range(len(pop)):
+        rand=random.randint(0,1000)
+        c=0
+        while c<10:
+            if rand<=cumi_ps[c]:
+                new.append(pop[c])
+                break
+            c=c+1
+           
+       
+     
+        
     
-    count=0
-    for j in pop:
-        if round_round_pm[count]==0:
-            pass
-        else:
-            for e in range(round_round_pm[count]):
-                new.append(j)
-        count=count+1
     bin_pop=[dec2bin(f) for f in new]
-    
-    for i in range(0,pop_size,2):
+        
+    for i in range(0,len(new),2):
+        
         popi=list(bin_pop[i])
+            
         popis=list(bin_pop[i+1])
         cross_site=random.randint(0,4)
-        '''print('before cross over')
-        print(popi,popis)
-        print(cross_site)
-        '''
         
-        for j in range(cross_site+1,5):
+    #print('before cross over')
+    #print(popi,popis)
+    #print(cross_site)
+        
+        
+    for j in range(cross_site+1,5):
+        
+        if popi[j]=='1' and popis[j]=='0':
+            popi[j]='0'
+            popis[j]='1'
+        elif popi[j]=='0' and popis[j]=='1':
+            popi[j]='1'
+            popis[j]='0'
+        else:
+            pass
             
-            if popi[j]=='1' and popis[j]=='0':
-                popi[j]='0'
-                popis[j]='1'
-            elif popi[j]=='0' and popis[j]=='1':
-                popi[j]='1'
-                popis[j]='0'
-            else:
-                pass
-            
-        '''print('After cross over')
-        print(popi,popis)
-        '''
-        popi=''.join(popi)
-        popis=''.join(popis)
-        bin_pop[i]=popi
-        bin_pop[i+1]=popis
+    #print('After cross over')
+    #print(popi,popis)
+        
+    popi=''.join(popi)
+    popis=''.join(popis)
+    bin_pop[i]=popi
+    bin_pop[i+1]=popis
     pop=[bin2dec(f) for f in bin_pop]
-    print(new)
+      
     maxi=max(pop)
     maxicount=pop.count(maxi)
-   # random.shuffle(pop)
+    
+     
     
     
         
